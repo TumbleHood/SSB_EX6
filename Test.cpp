@@ -18,8 +18,29 @@ TEST_CASE("tests"){
 
     Schedule schedule(teams);
 
-    
     CHECK_NOTHROW(schedule.result_table());
 
+    int longest = -1;
+    int index = -1;
+    for (unsigned int i = 0; i < teams.size(); i++){
+        if (teams.at(i).get_max_win_streak() > longest){
+            longest = teams.at(i).get_max_win_streak();
+            index = (int)i;
+        }
+    }
 
+    CHECK_EQ(longest, schedule.longest_win_streak().first);
+    CHECK_EQ(teams.at((unsigned int)index).get_name(), schedule.longest_win_streak().second);
+
+    longest = -1;
+    index = -1;
+    for (unsigned int i = 0; i < teams.size(); i++){
+        if (teams.at(i).get_max_loss_streak() > longest){
+            longest = teams.at(i).get_max_loss_streak();
+            index = (int)i;
+        }
+    }
+
+    CHECK_EQ(longest, schedule.longest_loss_streak().first);
+    CHECK_EQ(teams.at((unsigned int)index).get_name(), schedule.longest_loss_streak().second);   
 }

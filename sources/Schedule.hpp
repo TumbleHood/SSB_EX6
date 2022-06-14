@@ -7,7 +7,7 @@ class Schedule{
     private:
         League league;
         vector<Game*> games;
-        vector<Team*> rated;
+        vector<string> rated;
         void game();
     public:
         Schedule();

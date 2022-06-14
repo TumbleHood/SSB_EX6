@@ -46,7 +46,7 @@ void Schedule::game(){
                 }
             }
         }
-        rated.push_back(teams.at(best_index));
+        rated.push_back(teams.at(best_index)->get_name());
         teams.erase(teams.begin() + best_index);
     }
 }
@@ -101,7 +101,7 @@ void Schedule::result_table(){
 vector<string> Schedule::top_teams(int number){
     vector<string> top;
     for (unsigned int i = 0; i < number; i++){
-        top.push_back(rated.at(i)->get_name());
+        top.push_back(rated.at(i));
     }
     return top;
 }
@@ -109,41 +109,44 @@ vector<string> Schedule::top_teams(int number){
 pair<int, string> Schedule::longest_win_streak(){
     int longest = -1;
     int index = -1;
-    for (unsigned int i = 0; i < rated.size(); i++){
-        if (rated.at(i)->get_max_win_streak() > longest){
-            longest = rated.at(i)->get_max_win_streak();
+    vector<Team*> teams = league.get_teams();
+    for (unsigned int i = 0; i < teams.size(); i++){
+        if (teams.at(i)->get_max_win_streak() > longest){
+            longest = teams.at(i)->get_max_win_streak();
             index = (int)i;
         }
     }
     pair<int, string> team;
     team.first = longest;
-    team.second = rated.at((unsigned int)index)->get_name();
+    team.second = teams.at((unsigned int)index)->get_name();
     return team;
 }
 
 pair<int, string> Schedule::longest_loss_streak(){
     int longest = -1;
     int index = -1;
-    for (unsigned int i = 0; i < rated.size(); i++){
-        if (rated.at(i)->get_max_loss_streak() > longest){
-            longest = rated.at(i)->get_max_loss_streak();
+    vector<Team*> teams = league.get_teams();
+    for (unsigned int i = 0; i < teams.size(); i++){
+        if (teams.at(i)->get_max_loss_streak() > longest){
+            longest = teams.at(i)->get_max_loss_streak();
             index = (int)i;
         }
     }
     pair<int, string> team;
     team.first = longest;
-    team.second = rated.at((unsigned int)index)->get_name();
+    team.second = teams.at((unsigned int)index)->get_name();
     return team;
 }
 
 vector<string> Schedule::teams_that_scored_more_than_absorbed(){
-    vector<string> teams;
-    for (unsigned int i = 0; i < rated.size(); i++){
-        if (rated.at(i)->get_points_scored() > rated.at(i)->get_pointed_absorbed()){
-            teams.push_back(rated.at(i)->get_name());
+    vector<string> scored;
+    vector<Team*> teams = league.get_teams();
+    for (unsigned int i = 0; i < teams.size(); i++){
+        if (teams.at(i)->get_points_scored() > teams.at(i)->get_pointed_absorbed()){
+            scored.push_back(teams.at(i)->get_name());
         }
     }
-    return teams;
+    return scored;
 }
 
 int Schedule::times_home_team_won(){

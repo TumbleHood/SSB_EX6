@@ -6,7 +6,7 @@ int main(){
     Team t2 = Team("worst", 0);
     vector<Team> t = {t1, t2};
 
-    Schedule s = Schedule(t);
+    Schedule s(t);
 
     cout << "Results:" << endl;
     s.result_table();
