@@ -16,7 +16,7 @@ OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
 run: test
 
-test:  $(OBJECTS)
+test:  $(OBJECTS) TestRunner.o
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp $(HEADERS)
@@ -32,9 +32,9 @@ tidy:
 valgrind: test
 	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./test 2>&1 | { egrep "lost| at " || true; }
 
-main: $(SOURCES) main.cpp
+main: $(OBJECTS) main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp $(SOURCES) -o main
 
 clean:
-	rm -f $(OBJECTS) *.o test* 
+	rm -f $(OBJECTS) *.o objects/main.o objects/Test.o objects/TestRunner.o test main
 	rm -f StudentTest*.cpp
