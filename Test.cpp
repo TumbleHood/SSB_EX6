@@ -1,9 +1,9 @@
 #include "doctest.h"
-#include "sources/Schedule.cpp"
+#include "sources/Schedule.hpp"
 
 TEST_CASE("tests"){
     vector<string> names = {"Angles", "Beavers", "Chitas", "Devils", "Emus",
-                            "Foxes", "Giants", "Huligans", "Indigos", "Jaguars",
+                            "Foxes", "Giants", "Hornets", "Iguanas", "Jaguars",
                             "Koalas", "Llamas", "Monkeys", "Nimphs", "Owels",
                             "Panthers", "Queens", "Rebels", "Sharks", "Tigers"};
 
@@ -11,13 +11,15 @@ TEST_CASE("tests"){
                                     0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1};
     
     vector<Team> teams;
-    for (unsigned int i = 0; i < 0; i++){
-        Team team = Team(names.at(i), talent_levels.at(i));
+    for (unsigned int i = 0; i < MAX_TEAMS; i++){
+        Team team(names.at(i), talent_levels.at(i));
         teams.push_back(team);
     }
 
-    Schedule schedule = Schedule(teams);
+    Schedule schedule(teams);
 
-    CHECK_NOTHROW(schedule.result_table());
     
+    CHECK_NOTHROW(schedule.result_table());
+
+
 }

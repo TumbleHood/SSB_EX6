@@ -12,7 +12,6 @@ class Schedule{
     public:
         Schedule();
         Schedule(vector<Team>& teams);
-        Schedule(League& league): league(league){};
         void result_table();
         vector<string> top_teams(int number);
         pair<int, string> longest_win_streak();
