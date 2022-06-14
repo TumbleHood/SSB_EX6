@@ -18,7 +18,7 @@ Schedule::Schedule(vector<Team>& teams){
 }
 
 void Schedule::game(){
-    for (unsigned int round = 1; round <= ROUNDS; round++){
+    for (int round = 1; round <= ROUNDS; round++){
         vector<Team*> arrangement = league.arrange(round);
         for (unsigned int i = 0; i < MAX_TEAMS / 2; i++){ //first cycle
             Game* game = new Game(arrangement.at(i), arrangement.at(MAX_TEAMS-i-1));
@@ -31,8 +31,8 @@ void Schedule::game(){
     }
 
     vector<Team*> teams = vector<Team*>(league.get_teams());
-    for (unsigned int i = 0; i < league.get_teams().size(); i++){
-        unsigned int best_index = -1;
+    for (int i = 0; i < league.get_teams().size(); i++){
+        unsigned int best_index = 0;
         int most_wins = -1;
         int most_points = -1;
         for (unsigned int j = 0; j < teams.size(); j++){ 
@@ -52,23 +52,23 @@ void Schedule::game(){
 }
 
 void Schedule::result_table(){
-    int max_team_name_length = 0;
-    int max_win_loss_ratio_length = 0;
-    int max_score_difference_length = 0;
+    size_t max_team_name_length = 0;
+    size_t max_win_loss_ratio_length = 0;
+    size_t max_score_difference_length = 0;
 
     vector<Team*> teams = league.get_teams();
     for (auto it = teams.begin(); it != teams.end(); ++it){
         int current_team_name_length = ((*it)->get_name()).length();
         if (max_team_name_length < current_team_name_length){
-            max_team_name_length = current_team_name_length;
+            max_team_name_length = (size_t)current_team_name_length;
         }
         int current_win_loss_ratio_length = (to_string((*it)->get_wins()) + ":" + to_string((*it)->get_losses())).length();
         if (max_win_loss_ratio_length < current_win_loss_ratio_length){
-            max_win_loss_ratio_length = current_win_loss_ratio_length;
+            max_win_loss_ratio_length = (size_t)current_win_loss_ratio_length;
         }
         int current_score_difference_length = (to_string((*it)->get_points_scored() - (*it)->get_pointed_absorbed())).length();
         if (max_score_difference_length < current_score_difference_length){
-            max_score_difference_length = current_score_difference_length;
+            max_score_difference_length = (size_t)current_score_difference_length;
         }
     }
 
@@ -112,12 +112,12 @@ pair<int, string> Schedule::longest_win_streak(){
     for (unsigned int i = 0; i < rated.size(); i++){
         if (rated.at(i)->get_max_win_streak() > longest){
             longest = rated.at(i)->get_max_win_streak();
-            index = i;
+            index = (int)i;
         }
     }
     pair<int, string> team;
     team.first = longest;
-    team.second = rated.at(index)->get_name();
+    team.second = rated.at((unsigned int)index)->get_name();
     return team;
 }
 
@@ -127,12 +127,12 @@ pair<int, string> Schedule::longest_loss_streak(){
     for (unsigned int i = 0; i < rated.size(); i++){
         if (rated.at(i)->get_max_loss_streak() > longest){
             longest = rated.at(i)->get_max_loss_streak();
-            index = i;
+            index = (int)i;
         }
     }
     pair<int, string> team;
     team.first = longest;
-    team.second = rated.at(index)->get_name();
+    team.second = rated.at((unsigned int)index)->get_name();
     return team;
 }
 

@@ -32,6 +32,9 @@ tidy:
 valgrind: test
 	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./test 2>&1 | { egrep "lost| at " || true; }
 
+main:
+	$(CXX) $(CXXFLAGS) main.cpp $(SOURCES) -o main
+
 clean:
 	rm -f $(OBJECTS) *.o test* 
 	rm -f StudentTest*.cpp

@@ -25,7 +25,7 @@ League::League(vector<Team>& teams){
 vector<Team*> League::arrange(int round){
     Team* arrangement[MAX_TEAMS];
     arrangement[0] = teams[0];
-    for (unsigned int i = 0; i < MAX_TEAMS-1; i++){
+    for (int i = 0; i < MAX_TEAMS-1; i++){
         arrangement[(round+i-1)%(MAX_TEAMS-1) + 1] = teams[i+1];
     }
 
