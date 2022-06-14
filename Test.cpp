@@ -1,3 +1,6 @@
+// run "make test"
+// then run "./test"
+
 #include "doctest.h"
 #include "sources/Schedule.hpp"
 

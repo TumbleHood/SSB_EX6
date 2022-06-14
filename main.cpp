@@ -1,3 +1,6 @@
+// run "make main"
+// then run "./main"
+
 #include "sources/Schedule.hpp"
 
 int main(){
