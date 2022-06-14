@@ -2,11 +2,11 @@
 #include <vector>
 #include <unordered_map>
 
-#define MAX_TEAMS 20
+static constexpr int MAX_TEAMS = 20;
 
 class League{
     private:
-        Team* teams[MAX_TEAMS];
+        vector<Team*> teams;
     public:
         League();
         League(vector<Team>& teams);

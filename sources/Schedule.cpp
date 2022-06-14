@@ -1,6 +1,6 @@
 #include "Schedule.hpp"
 
-static void ntimes(int n, string c){
+static void ntimes(int n, const string& c){
     while (n > 0){
         cout << c;
         n--;
@@ -157,7 +157,7 @@ int Schedule::times_home_team_won(){
 }
 
 double Schedule::average_points_per_game(){
-    unsigned int i;
+    unsigned int i = 0;
     int sum = 0;
     for (i = 0; i < games.size(); i++){
         sum += games.at(i)->get_home_points();

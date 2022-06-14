@@ -1,7 +1,7 @@
 #include "League.hpp"
 #include <iostream>
 
-#define ROUNDS MAX_TEAMS-1
+static constexpr int ROUNDS = MAX_TEAMS-1;
 
 class Schedule{
     private:
